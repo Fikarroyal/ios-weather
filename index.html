@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Weather</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23FFD700'/%3E%3Cpath d='M12 4V2M12 22v-2M4 12H2M22 12h-2M18.364 5.636l-1.414 1.414M6.05 17.95l-1.414 1.414M5.636 5.636l1.414 1.414M17.95 17.95l1.414 1.414' stroke='%23FFA500' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml">
+</head>
+<body>
+    <div class="weather-app">
+        <div class="background-overlay"></div> <div class="current-weather">
+            <h1 class="location">Loading...</h1>
+            <p class="temperature">--°</p>
+            <p class="condition">Loading...</p>
+            <p class="high-low">H: --° L: --°</p>
+        </div>
+
+        <div class="weather-details-section">
+            <div class="hourly-forecast">
+                <h3>Perkiraan Jam-an</h3>
+                <div class="hourly-scroll">
+                    </div>
+            </div>
+
+            <div class="daily-forecast">
+                <h3>Perkiraan Harian</h3>
+                </div>
+            
+            <div class="additional-details">
+                <div class="detail-box">
+                    <p class="detail-label">UV Index</p>
+                    <p class="detail-value" id="uv-index">--</p>
+                </div>
+                <div class="detail-box">
+                    <p class="detail-label">Wind</p>
+                    <p class="detail-value" id="wind-speed">-- km/h</p>
+                </div>
+                <div class="detail-box">
+                    <p class="detail-label">Humidity</p>
+                    <p class="detail-value" id="humidity">--%</p>
+                </div>
+                <div class="detail-box">
+                    <p class="detail-label">Visibility</p>
+                    <p class="detail-value" id="visibility">-- km</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

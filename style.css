@@ -1,0 +1,345 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
+    font-weight: 300; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #FFFFFF;
+    overflow: hidden; 
+    padding: 20px; 
+}
+
+.weather-app {
+    width: 960px; 
+    height: 540px; 
+    border-radius: 35px; 
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75); 
+    display: flex; 
+    flex-direction: row; 
+    background-color: #000000; 
+}
+
+/* Default Background Overlay untuk kondisi loading/error */
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #1E293B, #334155); 
+    z-index: 1;
+}
+
+.weather-app > div:not(.background-overlay) {
+    position: relative; 
+    z-index: 2;
+}
+
+/* --- Current Weather Section (Kolom Kiri) --- */
+.current-weather {
+    flex: 0 0 38%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    padding: 30px; 
+    text-align: center;
+    color: #FFFFFF; 
+}
+
+.current-weather .location {
+    font-size: 2.8rem; 
+    font-weight: 600; 
+    margin-bottom: 8px; 
+}
+
+.current-weather .temperature {
+    font-size: 8.5rem; 
+    font-weight: 200; 
+    line-height: 1; 
+    margin-bottom: 8px; 
+}
+
+.current-weather .condition {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85); 
+    margin-bottom: 8px;
+}
+
+.current-weather .high-low {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0; 
+}
+
+/* --- Details Section (Kolom Kanan - Scrollable) --- */
+.weather-details-section {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    padding: 25px; 
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none; 
+    border-left: 1px solid rgba(255, 255, 255, 0.1); 
+    background-color: rgba(0, 0, 0, 0.2); 
+}
+.weather-details-section::-webkit-scrollbar {
+    display: none; 
+}
+
+
+.weather-details-section h3 {
+    font-size: 1.3rem; 
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9); 
+    margin-bottom: 18px; 
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12); 
+}
+
+/* --- Hourly Forecast (dalam Details Section) --- */
+.hourly-forecast {
+    background-color: rgba(255, 255, 255, 0.08); 
+    border-radius: 18px; 
+    padding: 18px; 
+    margin-bottom: 22px; 
+    min-height: 100px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hourly-scroll {
+    display: flex;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px; 
+    scrollbar-width: none; 
+    width: 100%; 
+}
+.hourly-scroll::-webkit-scrollbar {
+    display: none; 
+}
+
+.hourly-item {
+    display: flex; /* Tambahkan flex agar item internal rapi */
+    flex-direction: column; /* Tata letak vertikal untuk time, icon, temp */
+    align-items: center; /* Pusatkan secara horizontal */
+    min-width: 70px; 
+    margin-right: 18px; 
+    color: rgba(255, 255, 255, 0.9); /* Pastikan teks terlihat */
+    flex-shrink: 0; /* Penting agar tidak menyusut saat scroll */
+}
+
+.hourly-item .time {
+    font-size: 1.05rem; 
+    margin-bottom: 5px; /* Jarak antara waktu dan ikon */
+}
+.hourly-item img {
+    width: 45px; 
+    height: 45px;
+    margin-bottom: 5px; /* Jarak antara ikon dan suhu */
+}
+.hourly-item .temp {
+    font-size: 1.3rem; 
+    font-weight: 500;
+}
+
+/* --- Daily Forecast (dalam Details Section) --- */
+.daily-forecast {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 22px;
+    min-height: 150px; 
+    display: flex;
+    flex-direction: column; /* Mengatur item harian dalam kolom */
+    justify-content: flex-start; /* Konten dimulai dari atas */
+    align-items: stretch; /* Item mengisi lebar container */
+}
+
+/* Styling untuk setiap baris perkiraan harian */
+.daily-item {
+    display: flex; /* Gunakan flexbox untuk menyusun elemen dalam satu baris */
+    justify-content: space-between; /* Menjaga jarak antar elemen */
+    align-items: center; /* Pusatkan secara vertikal */
+    padding: 12px 0; /* Padding vertikal */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
+    color: rgba(255, 255, 255, 0.9); /* Pastikan teks terlihat */
+}
+
+.daily-item:last-child {
+    border-bottom: none; /* Hapus border bawah pada item terakhir */
+}
+
+.daily-item .day {
+    flex: 1; /* Mengambil ruang fleksibel */
+    font-size: 1.2rem; 
+    font-weight: 400;
+    text-align: left; /* Teks hari rata kiri */
+}
+
+.daily-item .icon {
+    flex-shrink: 0; /* Ikon tidak menyusut */
+    margin: 0 15px; /* Jarak antara hari dan ikon */
+    display: flex; /* Penting untuk memposisikan gambar */
+    justify-content: center;
+    align-items: center;
+}
+
+.daily-item .icon img {
+    width: 40px; 
+    height: 40px;
+}
+
+.daily-item .low-temp,
+.daily-item .high-temp {
+    width: 60px; /* Lebar tetap untuk suhu agar rata */
+    font-size: 1.2rem; 
+    text-align: right; /* Suhu rata kanan */
+    font-weight: 500;
+}
+
+.daily-item .low-temp {
+    color: rgba(255, 255, 255, 0.7); /* Suhu rendah sedikit lebih redup */
+}
+
+
+/* --- Additional Details (dalam Details Section) --- */
+.additional-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px; 
+}
+
+.detail-box {
+    background-color: rgba(255, 255, 255, 0.08); 
+    border-radius: 18px;
+    padding: 18px; 
+}
+
+.detail-box .detail-label {
+    font-size: 1rem; 
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 8px; 
+}
+
+.detail-box .detail-value {
+    font-size: 2rem; 
+    font-weight: 500;
+}
+
+/* Styling untuk pesan loading/error */
+.loading-message {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* --- Responsivitas untuk Layar Kecil (Mobile Portrait) --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0; 
+        overflow-y: auto; 
+    }
+
+    .weather-app {
+        width: 100vw; 
+        height: 100vh; 
+        border-radius: 0; 
+        flex-direction: column; 
+        box-shadow: none; 
+    }
+
+    .current-weather {
+        flex: none; 
+        padding-top: 50px; 
+        padding-bottom: 20px;
+        border-right: none; 
+    }
+
+    .current-weather .location {
+        font-size: 2.5rem; 
+    }
+
+    .current-weather .temperature {
+        font-size: 7rem; 
+    }
+
+    .current-weather .condition,
+    .current-weather .high-low {
+        font-size: 1.5rem; 
+    }
+
+    .weather-details-section {
+        flex-grow: 1; 
+        border-left: none; 
+        padding: 15px; 
+    }
+
+    .weather-details-section h3 {
+        font-size: 1.2rem; 
+    }
+
+    .hourly-item {
+        min-width: 60px; 
+    }
+    
+    .hourly-forecast, .daily-forecast {
+        min-height: 80px; 
+        padding: 15px;
+    }
+
+    .loading-message {
+        font-size: 1rem;
+    }
+}
+
+/* Responsivitas untuk Layar Sedang (Tablet Portrait / Desktop Kecil) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .weather-app {
+        width: 90vw; 
+        height: 85vh; 
+    }
+
+    .current-weather .location {
+        font-size: 2.5rem;
+    }
+    .current-weather .temperature {
+        font-size: 7rem;
+    }
+    .current-weather .condition,
+    .current-weather .high-low {
+        font-size: 1.4rem;
+    }
+
+    .weather-details-section h3 {
+        font-size: 1.2rem;
+    }
+    .hourly-item .time, .hourly-item .temp {
+        font-size: 1.1rem;
+    }
+    .daily-item .day, .daily-item .high-temp, .daily-item .low-temp {
+        font-size: 1.1rem;
+    }
+    .detail-box .detail-label {
+        font-size: 0.95rem;
+    }
+    .detail-box .detail-value {
+        font-size: 1.9rem;
+    }
+}
