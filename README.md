@@ -16,4 +16,5 @@ A lightweight, framework‑free weather dashboard that mirrors the clean look of
 ## Preview
 <img width="800" alt="ios-weather1" src="https://github.com/user-attachments/assets/20b211e3-f1e3-49f3-8cf1-5f86d254adea" />
 
-<img width="788" alt="ios-weather2" src="https://github.com/user-attachments/assets/c80a2d9f-b694-4a8f-a5ff-8fbc8b138278" />
+<img width="798" alt="ios-weather2" src="https://github.com/user-attachments/assets/39a2b891-c899-4495-9e22-f7240dc1a4ff" />
+
